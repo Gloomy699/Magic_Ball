@@ -9,21 +9,24 @@ void main() {
         appBar: AppBar(
           title: Text('Ask me anything'),
         ),
-        body: MagicBall(),
+        body: _MagicBall(),
       ),
     ),
   );
 }
 
-class MagicBall extends StatefulWidget {
+class _MagicBall extends StatefulWidget {
   @override
   _MagicBallState createState() => _MagicBallState();
 }
 
-class _MagicBallState extends State<MagicBall> {
-  int ballNumber = 1;
-  void changedDall() {
-    ballNumber = Random().nextInt(5) + 1;
+class _MagicBallState extends State<_MagicBall> {
+  int _ballNumber = 1;
+
+  void _changeBall() {
+    setState(() {
+      _ballNumber = Random().nextInt(5) + 1;
+    });
   }
 
   @override
@@ -32,14 +35,8 @@ class _MagicBallState extends State<MagicBall> {
       child: Container(
         padding: EdgeInsets.all(16.0),
         child: TextButton(
-          onPressed: () {
-            setState(
-              () {
-                changedDall();
-              },
-            );
-          },
-          child: Image.asset('assets/images/ball$ballNumber.png'),
+          onPressed: _changeBall,
+          child: Image.asset('assets/images/ball$_ballNumber.png'),
         ),
       ),
     );
